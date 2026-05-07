@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>calvin's reading list</title>
+
+  <style>
+    /* Page spacing */
+body {
+	margin: 0;
+  font-family: Courier New;
+} 
+
+.text { 
+	margin: 30px;
+} 
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+  
+.header {
+  background-color: #0039a3;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.header a {
+  text-decoration: none;
+  color: white;
+} 
+
+/* page title */
+.book-title {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.book-title td,tr {
+    text-align: center;
+} 
+
+.section-title {
+	text-align: center;
+	margin: 10px;
+	font-size: 36px;
+} 
+/* table contents */ 
+    .table-container {
+      max-width: 1200px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #0039a3;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 0px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .sort-indicator {
+      margin-left: 6px;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body style="background-color:#C9DCFF;">
+
+<div class="header">
+  <span><a href="../index.html">calvin's reading list</a></span>
+  <span><a href="../to-read.html">to-read</a></span>
+  <span><a href="../collection.html">collection</a></span>
+  <span><a href="../bookmarks.html">bookmarks!</a></span>
+  <span><a href="../2025.html">2025</a></span>
+</div>
+<br>
+<div>
+	<table class="book-title">
+		<tr class="section-title">
+			<td><b>calvin's book collection</b></td>
+		</tr>
+	</table>
+</div>
+
+
+<div 
+  <div class="table-container">
+
+    <div class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
+      />
+
+      <!--select id="departmentFilter">
+        <option value="">All</option>
+        <option value="Title">Title</option>
+        <option value="Author">Author</option>
+        <option value="Year published">Year published</option>
+		<option value="Genre">Genre</option>
+		<option value="Year read">Year read</option>
+		<option value="Place of purchase">Place of purchase</option>
+      </select-->
+    </div>
+
+    <table id="employeeTable">
+      <thead>
+        <tr>
+          <th data-column="Title">Title <span class="sort-indicator"></span></th>
+          <th data-column="Author">Author <span class="sort-indicator"></span></th>
+          <th data-column="Year published">Year published <span class="sort-indicator"></span></th>
+		  <th data-column="Genre">Genre <span class="sort-indicator"></span></th>
+          <th data-column="Year read">Year read <span class="sort-indicator"></span></th>
+		  <th data-column="Place of purchase">Place of purchase <span class="sort-indicator"></span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><a href="../books/sartoris.html"><u>Sartoris</u></td>
+          <td>William Faulkner</td>
+          <td>1929</td>
+		  <td>literary fiction</td>
+          <td>N/A</td>
+		  <td>McKays Mebane</td>
+        </tr>
+        <tr>
+          <td><a href="../books/"><u>The Just Assassins (Les justes)</u></td>
+          <td>Albert Camus</td>
+          <td>1949</td>
+		  <td>play</td>
+          <td>N/A</td>
+		  <td>ROMS</td>
+        </tr>
+		<tr>
+          <td><a href="../books/"><u>Exile and the Kingdom (L'exil et le royaume)</u></td>
+          <td>Albert Camus</td>
+          <td>1957</td>
+		  <td>short story collection</td>
+          <td>N/A</td>
+		  <td>ROMS</td>
+        </tr>
+		<tr>
+          <td><a href="../books/"><u>Pictures from Brueghel</u></td>
+          <td>William Carlos Williams</td>
+          <td>1962</td>
+		  <td>play</td>
+          <td>N/A</td>
+		  <td>Bookmans</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const table = document.getElementById("employeeTable");
+    const tbody = table.querySelector("tbody");
+    const headers = table.querySelectorAll("th");
+
+    const searchInput = document.getElementById("searchInput");
+    const departmentFilter = document.getElementById("departmentFilter");
+
+    let sortDirection = {};
+
+    // SORTING
+    headers.forEach((header, index) => {
+      header.addEventListener("click", () => {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const isAscending = !sortDirection[index];
+
+        rows.sort((a, b) => {
+          let aText = a.children[index].textContent.trim();
+          let bText = b.children[index].textContent.trim();
+
+          // Detect numbers
+          const aNum = parseFloat(aText);
+          const bNum = parseFloat(bText);
+
+          if (!isNaN(aNum) && !isNaN(bNum)) {
+            return isAscending ? aNum - bNum : bNum - aNum;
+          }
+
+          return isAscending
+            ? aText.localeCompare(bText)
+            : bText.localeCompare(aText);
+        });
+
+        // Update table
+        tbody.innerHTML = "";
+        rows.forEach(row => tbody.appendChild(row));
+
+        // Reset indicators
+        headers.forEach(h => {
+          h.querySelector(".sort-indicator").textContent = "";
+        });
+
+        // Set current indicator
+        header.querySelector(".sort-indicator").textContent =
+          isAscending ? "▲" : "▼";
+
+        sortDirection[index] = isAscending;
+      });
+    });
+
+    // FILTERING
+    function filterTable() {
+      const searchText = searchInput.value.toLowerCase();
+      const departmentValue = departmentFilter.value;
+
+      const rows = tbody.querySelectorAll("tr");
+
+      rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase();
+        const department = row.children[1].textContent;
+
+        const matchesSearch = rowText.includes(searchText);
+        const matchesDepartment =
+          !departmentValue || department === departmentValue;
+
+        row.style.display =
+          matchesSearch && matchesDepartment ? "" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterTable);
+    departmentFilter.addEventListener("change", filterTable);
+  </script>
+
+</body>
+</html>
+
