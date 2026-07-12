@@ -314,7 +314,6 @@ html {
     const headers = table.querySelectorAll("th");
 
     const searchInput = document.getElementById("searchInput");
-    const departmentFilter = document.getElementById("departmentFilter");
 
     let sortDirection = {};
 
@@ -359,27 +358,17 @@ html {
     });
 
     // FILTERING
-    function filterTable() {
-      const searchText = searchInput.value.toLowerCase();
-      const departmentValue = departmentFilter.value;
+function filterTable() {
+  const searchText = searchInput.value.toLowerCase();
+  const rows = tbody.querySelectorAll("tr");
 
-      const rows = tbody.querySelectorAll("tr");
+  rows.forEach(row => {
+    const rowText = row.textContent.toLowerCase();
+    row.style.display = rowText.includes(searchText) ? "" : "none";
+  });
+}
 
-      rows.forEach(row => {
-        const rowText = row.textContent.toLowerCase();
-        const department = row.children[1].textContent;
-
-        const matchesSearch = rowText.includes(searchText);
-        const matchesDepartment =
-          !departmentValue || department === departmentValue;
-
-        row.style.display =
-          matchesSearch && matchesDepartment ? "" : "none";
-      });
-    }
-
-    searchInput.addEventListener("input", filterTable);
-    departmentFilter.addEventListener("change", filterTable);
+searchInput.addEventListener("input", filterTable);
   </script>
 
 </body>
