@@ -6,8 +6,8 @@
 <style>
 /* Page spacing */
 body {
-  margin-left: 0px
-  font-family: Courier New;
+  margin-left: 0px;
+  font-family: 'Courier New', Courier, monospace;
 } 
 
 /* Smooth scrolling */
@@ -94,11 +94,13 @@ table {
 } 
 
 .author { 
+	width: 50%;
 	padding-right: 15px;
 }
 
 .works {
-	padding-left: 15px;
+	width: 50%;
+	margin-left: 15px;
 }
 
 </style>
@@ -121,13 +123,13 @@ table {
 		<td class="section-title" class="works"><b>One-off books and assorted works</b></td>
 	</tr>
 	<tr>
-		<td class="subtext" class="author">If just an authors name is listed, it indicates a general interest in their work; I don't have a interest in a specific work of theirs. If there is a list of works under their name, it indicates specific works they have written I have an interest in. Works I have read are listed in green.</td>
-		<td class="subtext" class="works">This lists singular works I am interested in reading, without a particular interest in the author or their other works.</td>
+		<td class="subtext" class="author">
+		<td class="subtext" class="works"></td>
 	</tr>
 	
-	<tr class="author">
-		<td style="width: 50%"> 
-
+<div class="author">
+	<div class="section-title">Authors (by surname)</div>
+	<div class="subtext">If just an authors name is listed, it indicates a general interest in their work; I don't have a interest in a specific work of theirs. If there is a list of works under their name, it indicates specific works they have written I have an interest in. Works I have read are listed in green.</div>
 			<ul>
 				<li style="font-size: 20px;"><a href="https://en.wikipedia.org/wiki/Conrad_Aiken">Aiken, Conrad</a></li>
 			</ul> 
@@ -428,9 +430,11 @@ table {
 					</ol>
 				</li>
 			</ul>
-		</td>
+</div>
 		
-		<td class="works">
+		<div class="works">
+			<div class="section-title">One-off books and assorted works</div>
+			<div class="subtext">This lists singular works I am interested in reading, without a particular interest in the author or their other works.</div>
 			<ul>
 				<li style="font-size: 20px;">Fiction</li>
 					<ol>
@@ -459,6 +463,7 @@ table {
 						<li><u>Paris: A Poem</u> (1920) by Hope Mirrlees</li>
 					</ol>
 			</ul>
+		</div>
 
 			
 
