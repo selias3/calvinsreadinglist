@@ -6,8 +6,7 @@
 <style>
 /* Page spacing */
 body {
-  margin-left: 10px ;
-  margin-right: 10px;
+  margin-left: 0px
   font-family: Courier New;
 } 
 
@@ -94,8 +93,12 @@ table {
 	width: auto;
 } 
 
-.list-header { 
+.author { 
+	padding-right: 15px;
+}
 
+.works {
+	padding-left: 15px;
 }
 
 </style>
@@ -113,16 +116,16 @@ table {
 
 <div>
 <table>
-	<tr class="section-title">
-		<td><b>Authors (by surname)</b></td>	
-		<td><b>One-off books and assorted works</b></td>
+	<tr>
+		<td class="section-title" class="author"><b>Authors (by surname)</b></td>	
+		<td class="section-title" class="works"><b>One-off books and assorted works</b></td>
 	</tr>
 	<tr>
-		<td class="subtext">If just an authors name is listed, it indicates a general interest in their work; I don't have a interest in a specific work of theirs. If there is a list of works under their name, it indicates specific works they have written I have an interest in. Works I have read are listed in green.</td>
-		<td class="subtext">This lists singular works I am interested in reading, without a particular interest in the author or their other works.</td>
+		<td class="subtext" class="author">If just an authors name is listed, it indicates a general interest in their work; I don't have a interest in a specific work of theirs. If there is a list of works under their name, it indicates specific works they have written I have an interest in. Works I have read are listed in green.</td>
+		<td class="subtext" class="works">This lists singular works I am interested in reading, without a particular interest in the author or their other works.</td>
 	</tr>
 	
-	<tr>
+	<tr class="author">
 		<td style="width: 50%"> 
 
 			<ul>
@@ -427,11 +430,12 @@ table {
 			</ul>
 		</td>
 		
-		<td>
+		<td class="works">
 			<ul>
 				<li style="font-size: 20px;">Fiction</li>
 					<ol>
 						<li><u>The Prague Cemetery</u> (2012) by Umberto Eco</li>
+					</ol>
 
 
 				<li style="font-size: 20px;">History and non fiction</li>
